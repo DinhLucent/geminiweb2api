@@ -49,6 +49,10 @@ gemini-web-to-api.exe
 .vscode/
 
 
+# tools cache
+.ua/
+.codegraph/
+
 # pycache
 examples/__pycache__/
 # air hot reload
