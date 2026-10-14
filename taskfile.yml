@@ -1,0 +1,29 @@
+version: "3"
+
+tasks:
+  run:
+    desc: Run the server
+    cmds:
+      - go run cmd/server/main.go
+
+  dev:
+    desc: Run the server with hot reload (air)
+    cmds:
+      - air --build.cmd "go build -o ./tmp/server{{exeExt}} ./cmd/server" --build.bin "./tmp/server{{exeExt}}"
+
+  install-air:
+    desc: Install air (hot reload tool)
+    cmds:
+      - go install github.com/air-verse/air@latest
+
+  build:
+    desc: Build the server binary
+    cmds:
+      - go build -o gemini-web-to-api cmd/server/main.go
+
+  e2e:
+    desc: Run live end-to-end tests using Gemini cookies from .env
+    env:
+      E2E: "1"
+    cmds:
+      - go test ./tests/e2e -v -count=1 -timeout 15m

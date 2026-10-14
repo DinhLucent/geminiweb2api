@@ -1,0 +1,31 @@
+services:
+  app:
+    build: .
+    container_name: app
+    ports:
+      - "4981:4981"
+    env_file:
+      - .env
+    environment:
+      - PORT=4981
+      - APP_ENV=production
+    restart: unless-stopped
+    volumes:
+      - ./.cookies:/home/appuser/.cookies
+    tmpfs:
+      - /tmp
+      - /home/appuser/.cache
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "wget",
+          "--quiet",
+          "--tries=1",
+          "--spider",
+          "http://localhost:4981/health",
+        ]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
