@@ -1,12 +1,12 @@
 <p align="center">
-  <img src="assets/gemini.png" width="400" alt="Gemini Logo">
+  <img src="assets/gemini-banner.png" width="720" alt="Gemini Web To API Banner">
 </p>
 
 <p align="center">
-  <a href="https://github.com/DinhLucent/geminiweb2api/releases"><img src="https://img.shields.io/github/v/release/DinhLucent/geminiweb2api?style=flat-square&logo=github&color=3670ad" alt="Release"></a>
+  <a href="https://github.com/DinhLucent/geminiweb2api/releases"><img src="https://img.shields.io/badge/version-v1.0.0-3670ad?style=flat-square&logo=github" alt="Version"></a>
   <a href="https://golang.org/"><img src="https://img.shields.io/badge/Go-1.21+-00ADD8?style=flat-square&logo=go" alt="Go Version"></a>
   <a href="https://www.docker.com/"><img src="https://img.shields.io/badge/Docker-Ready-2496ED?style=flat-square&logo=docker" alt="Docker"></a>
-  <a href="https://github.com/DinhLucent/geminiweb2api/blob/main/LICENSE"><img src="https://img.shields.io/github/license/DinhLucent/geminiweb2api?style=flat-square&color=orange" alt="License"></a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-green?style=flat-square" alt="License"></a>
   <img src="https://img.shields.io/badge/Maintained%3F-yes-green.svg?style=flat-square" alt="Maintained">
 </p>
 
@@ -321,6 +321,6 @@ Pull requests and issues are welcome.
 
 ---
 
-## License
+## License & Disclaimer
 
-This project is licensed under the MIT License. See [LICENSE](LICENSE) for details.
+This project is licensed under the MIT License. See [LICENSE](LICENSE) for license details and [DISCLAIMER.md](DISCLAIMER.md) for terms of use and liability limitations.

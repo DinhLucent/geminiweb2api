@@ -20,30 +20,3 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
-
-===============================================================================
-DISCLAIMER & TERMS OF USE
-===============================================================================
-
-1. Non-Affiliation
-This project is an independent open-source project and is NOT affiliated,
-associated, authorized, endorsed by, or in any way officially connected with
-Google LLC, Alphabet Inc., or any of their subsidiaries or affiliates.
-The official Google Gemini website is located at https://gemini.google.com.
-
-2. Research and Educational Purpose Only
-This software is provided strictly for educational, academic, and research
-purposes. It demonstrates web automation and protocol translation techniques.
-It is not intended for commercial exploitation or mass scraping.
-
-3. Compliance with Third-Party Terms
-This software interacts with Google services using reverse-engineered web
-endpoints and session cookies. Such interaction may be contrary to Google's
-Terms of Service or Acceptable Use Policies. Users are solely responsible
-for complying with all applicable laws, regulations, and third-party agreements.
-
-4. Assumption of Risk and Limitation of Liability
-Use of this software is at your own discretion and risk. In no event shall the
-author(s) or contributor(s) be liable for any claims, damages, account
-terminations, IP bans, service suspensions, data loss, or other liabilities
-arising from the use, inability to use, or distribution of this software.
