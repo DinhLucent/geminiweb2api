@@ -17,63 +17,56 @@
   <img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square" alt="PRs Welcome">
 </p>
 
-<h1 align="center">Gemini Web To API 🚀</h1>
+<p align="center">
+  <a href="README.md">🇻🇳 Tiếng Việt</a> | <a href="README_en.md">🇬🇧 English</a>
+</p>
+
+<h1 align="center">Gemini Web To API</h1>
 
 <p align="center">
-  Transforms Google Gemini web interface into a standardized REST API.<br/>
-  Access Gemini's power without API keys — just use your cookies!
+  Chuyển đổi giao diện web Google Gemini thành REST API tiêu chuẩn.<br/>
+  Sử dụng khả năng xử lý của Gemini thông qua cookie trình duyệt, không cần API key.
 </p>
 
 <p align="center">
-  <b>Created with ❤️ by <a href="https://github.com/ntthanh2603">@ntthanh2603</a></b>
+  <b>Tác giả: <a href="https://github.com/ntthanh2603">@ntthanh2603</a></b>
 </p>
 
 > [!NOTE]
-> This project is intended for **research and educational purposes only**. Please use responsibly and refrain from any commercial use.
+> Dự án này phục vụ mục đích nghiên cứu và học tập. Vui lòng không sử dụng cho mục đích thương mại.
 
 > [!WARNING]
-> This project is not affiliated with Google. It uses reverse-engineered web cookies and may not comply with [Google's Terms of Service](https://policies.google.com/terms). Use at your own risk — the author assumes no responsibility for any account actions or data loss.
+> Dự án không liên kết với Google. Hệ thống sử dụng kỹ thuật đảo ngược cookie web và có thể không tuân thủ [Điều khoản dịch vụ của Google](https://policies.google.com/terms). Người dùng tự chịu trách nhiệm về các rủi ro liên quan đến tài khoản hoặc dữ liệu khi vận hành.
 
 ---
 
-## 🎯 Why Gemini Web To API?
+## Tổng quan
 
-**Problem**: You want to use Google Gemini's latest models, but you don't have an API key or prefer not to use one.
+Gemini Web To API khởi tạo máy chủ proxy cục bộ kết nối trực tiếp đến giao diện web Google Gemini bằng cookie phiên đăng nhập từ trình duyệt. Máy chủ cung cấp các endpoint tương thích với chuẩn gọi API của OpenAI, Claude và Gemini.
 
-**Solution**: Creates a local API server that:
-
-- ✅ Connects to Gemini's web interface using your browser cookies
-- ✅ Exposes OpenAI / Claude / Gemini-compatible API endpoints
-- ✅ No API keys needed — just cookies from your browser
-- ✅ Handles authentication and session management automatically
-
-**Use Cases**:
-
-- Use Gemini without API keys
-- Test Gemini integration locally
-- Build applications leveraging Gemini's latest models
-- Develop with cookie-based authentication
+Dự án phù hợp cho các nhu cầu:
+- Tích hợp mô hình Gemini vào các ứng dụng hiện có mà không cần API key trả phí.
+- Thử nghiệm cục bộ các tính năng mới nhất trên web Gemini.
+- Sử dụng trực tiếp các SDK phổ biến của OpenAI, LangChain hoặc Google GenAI.
 
 ---
 
-## ⚡ Quick Start
+## Hướng dẫn cài đặt
 
-### 🐳 Option A — Docker Run (no setup required)
+### Cách 1: Chạy bằng Docker (Khuyên dùng)
 
-> No cloning needed — pull and run directly from the registry.
+Cách này không cần tải mã nguồn hay cài đặt môi trường Go, hình ảnh container được tải trực tiếp từ GitHub Container Registry.
 
-**Step 1 — Get your cookies**
+#### Bước 1: Lấy cookie tài khoản
 
 > [!WARNING]
-> Keep these values secure and **never share or commit them** — they provide direct access to your Google account.
+> Tuyệt đối không chia sẻ hoặc đẩy chuỗi cookie lên kho lưu trữ công khai vì giá trị này cho phép truy cập trực tiếp vào tài khoản Google của bạn.
 
-1. Go to [gemini.google.com](https://gemini.google.com) and sign in
-2. Press `F12` → **Network**, reload Gemini, and select a
-   `batchexecute?rpcids=otAQ7b` request
-3. Copy its complete `Cookie` request header. If the request URL contains an
-   account slot such as `/u/2/`, also use `GEMINI_AUTH_USER="2"` below.
+1. Đăng nhập vào [gemini.google.com](https://gemini.google.com) trên trình duyệt.
+2. Nhấn `F12` để mở Công cụ cho nhà phát triển, chuyển sang thẻ **Network**, tải lại trang và chọn một yêu cầu có tên `batchexecute?rpcids=otAQ7b`.
+3. Sao chép toàn bộ giá trị trong mục Request Header `Cookie`. Nếu đường dẫn yêu cầu có dạng `/u/2/`, ghi lại số `2` để gán cho biến `GEMINI_AUTH_USER`.
 
-**Step 2 — Run**
+#### Bước 2: Khởi chạy container
 
 ```bash
 docker run -d -p 4981:4981 \
@@ -94,40 +87,37 @@ docker run -d -p 4981:4981 \
   ghcr.io/ntthanh2603/gemini-web-to-api:latest
 ```
 
-**Done!** Jump to [Test it](#-test-it). 🎉
+Sau khi chạy lệnh, chuyển tiếp đến phần [Kiểm tra hoạt động](#kiểm-tra-hoạt-động).
 
 ---
 
-### 🛠️ Option B — Build from source
+### Cách 2: Chạy từ mã nguồn
 
-> Use this if you want to build for a specific architecture (amd64, arm64, etc.) or modify the source code.
+Phù hợp khi bạn cần chỉnh sửa mã nguồn hoặc biên dịch cho các kiến trúc phần cứng đặc thù.
 
-**Step 1 — Clone the repository**
+#### Bước 1: Tải mã nguồn
 
 ```bash
 git clone https://github.com/ntthanh2603/gemini-web-to-api.git
 cd gemini-web-to-api
 ```
 
-**Step 2 — Get your cookies and configure `.env`**
+#### Bước 2: Cấu hình tệp môi trường
 
 > [!WARNING]
-> Keep these values secure and **never commit your `.env` file** — it contains credentials that provide access to your Google account.
+> Không đưa tệp `.env` vào git commit để tránh lộ thông tin xác thực tài khoản.
 
-1. Go to [gemini.google.com](https://gemini.google.com) and sign in
-2. Press `F12` → **Network**, reload Gemini, and select a
-   `batchexecute?rpcids=otAQ7b` request
-3. Copy its complete `Cookie` request header into `GEMINI_COOKIES`.
-4. Match `GEMINI_AUTH_USER` to the request URL. For example, use `2` when the
-   URL contains `/u/2/`; leave it empty when there is no `/u/<number>/`.
-   Always take the cookie and account slot from the same browser tab.
-5. Create your `.env` from the example:
+1. Đăng nhập [gemini.google.com](https://gemini.google.com).
+2. Nhấn `F12`, vào thẻ **Network**, tải lại trang và tìm yêu cầu `batchexecute?rpcids=otAQ7b`.
+3. Sao chép toàn bộ giá trị header `Cookie` vào biến `GEMINI_COOKIES`.
+4. Nếu URL có dạng `/u/<số>/`, điền số đó vào `GEMINI_AUTH_USER`. Nếu không có, để trống biến này. Luôn lấy cookie và chỉ số tài khoản từ cùng một tab trình duyệt.
+5. Tạo tệp `.env` từ tệp mẫu:
 
    ```bash
    cp .env.example .env
    ```
 
-6. Paste the values into `.env`:
+6. Cập nhật các thông số vào `.env`:
 
    ```env
    GEMINI_COOKIES=your_complete_cookie_header
@@ -141,125 +131,100 @@ cd gemini-web-to-api
    RATE_LIMIT_MAX_REQUESTS=10
    ```
 
-**Step 3 — Run**
+#### Bước 3: Khởi động dịch vụ
 
-Pick whichever method suits your setup:
+| Phương pháp | Lệnh thực thi | Yêu cầu hệ thống |
+| --- | --- | --- |
+| Docker Compose | `docker compose up -d --build` | Docker |
+| Go trực tiếp | `go run cmd/server/main.go` | [Go 1.21+](https://golang.org/dl/) |
+| Task (chế độ phát triển) | `task dev` | [Task](https://taskfile.dev) và [Air](https://github.com/air-verse/air) (`task install-air`) |
 
-| Method             | Command                        | Requirements                                                                                |
-| ------------------ | ------------------------------ | ------------------------------------------------------------------------------------------- |
-| 🐳 Docker Compose  | `docker compose up -d --build` | Docker                                                                                      |
-| 🐹 Go direct       | `go run cmd/server/main.go`    | [Go 1.21+](https://golang.org/dl/)                                                          |
-| ⚡ Task (dev mode) | `task dev`                     | [Task](https://taskfile.dev) + [Air](https://github.com/air-verse/air) (`task install-air`) |
-
-> `task dev` runs the server with **hot reload**: Air rebuilds and restarts it whenever a `.go`, `.json` or `.env` file changes (config in `.air.toml`).
-
-**Done!** Jump to [Test it](#-test-it). 🎉
+Lệnh `task dev` kích hoạt chế độ tự động tải lại (hot reload) khi có thay đổi trong các tệp `.go`, `.json` hoặc `.env`.
 
 ---
 
-### ✅ Test it
+### Kiểm tra hoạt động
+
+Gửi thử một yêu cầu qua cURL:
 
 ```bash
 curl -X POST http://localhost:4981/openai/v1/chat/completions \
   -H "Content-Type: application/json" \
-  -d '{"model": "gemini-advanced", "messages": [{"role": "user", "content": "Hello!"}]}'
+  -d '{"model": "gemini-advanced", "messages": [{"role": "user", "content": "Xin chào!"}]}'
 ```
 
-Your Gemini Web To API is running at `http://localhost:4981` 🎉
+Dịch vụ mặc định lắng nghe tại địa chỉ `http://localhost:4981`.
 
 ---
 
-## ✨ Features
+## Tính năng
 
-- 🌉 **Universal AI Bridge**: One server, three protocols (OpenAI, Claude, Gemini)
-- 🔌 **Drop-in Replacement**: Works with existing OpenAI / Claude / Gemini SDKs
-- 🔄 **Smart Session Management**: Auto-rotates cookies to keep sessions alive
-- ⚡ **High Performance**: Built with Go and Fiber for speed
-- 🐳 **Production Ready**: Docker Compose support, Scalar UI, health checks
-- 📝 **Well Documented**: Interactive API docs at `/docs`
-- 🖼️ **Image Generation**: OpenAI-compatible text-to-image with authenticated `b64_json` output
-- 🧩 **Image Inputs**: Remote URLs, `data:` URLs and multiple reference images in chat requests
-- 🎬 **Video Generation**: Text-to-video (16:9 or 9:16 MP4) via Gemini Web's Videos tool, usable from the OpenAI (`client.videos`) and Google GenAI (`generate_videos`) SDKs
-- 🧾 **Canvas**: Gemini Canvas code files and documents via any chat API — just use a `-canvas` model (e.g. `gemini-pro-canvas`)
-- 🎵 **Music Generation**: Gemini Web's music tool through `client.audio.speech` (OpenAI) and `-music` models (Gemini)
+- Đa giao thức: Hỗ trợ đồng thời ba giao thức OpenAI (`/openai/v1`), Claude (`/claude`) và Gemini (`/gemini/v1beta`).
+- Tương thích SDK: Dùng trực tiếp với thư viện chính thức của OpenAI, Claude và Google GenAI mà không cần cấu hình phức tạp.
+- Quản lý phiên làm việc: Tự động xoay vòng cookie và duy trì token phiên để giữ kết nối ổn định.
+- Hiệu năng hệ thống: Viết bằng ngôn ngữ Go trên nền Fiber.
+- Sẵn sàng triển khai: Hỗ trợ Docker Compose, kiểm tra tình trạng dịch vụ (health check) và tài liệu API tương tác tại `/docs`.
+- Tạo hình ảnh: Tương thích chuẩn tạo ảnh của OpenAI, trả về định dạng `b64_json` có xác thực.
+- Xử lý ảnh đầu vào: Hỗ trợ truyền ảnh qua liên kết URL từ xa, chuỗi `data:` base64 và hỗ trợ nhiều ảnh tham chiếu cùng lúc.
+- Tạo video: Sinh video định dạng MP4 (tỷ lệ 16:9 hoặc 9:16) thông qua công cụ Videos của Gemini Web, tương thích với SDK của OpenAI (`client.videos`) và Google GenAI (`generate_videos`).
+- Chế độ Canvas: Thao tác với tài liệu và tệp mã nguồn Canvas qua các mã mô hình có hậu tố `-canvas` (ví dụ `gemini-pro-canvas`).
+- Tạo âm thanh: Tích hợp công cụ âm thanh qua giao thức `client.audio.speech` của OpenAI và các mô hình `-music` của Gemini.
 
-See [Image generation and image inputs](docs/image-generation.md) for tested examples, limitations and security guidance.
-See [Video generation](docs/video-generation.md) for the video APIs and the [OpenAI](examples/openai_video_client.py) / [Gemini](examples/gemini_video_client.py) SDK examples.
-See [Canvas](docs/canvas.md) and the [OpenAI](examples/openai_canvas_client.py) / [Gemini](examples/gemini_canvas_client.py) / [Claude](examples/claude_canvas_client.py) SDK examples for canvas mode.
-See [Music generation](docs/music.md) and the [OpenAI](examples/openai_music_client.py) / [Gemini](examples/gemini_music_client.py) SDK examples.
-
----
-
-## 🛠️ Configuration
-
-### Environment Variables
-
-| Variable                  | Required | Default | Description                                                      |
-| ------------------------- | -------- | ------- | ---------------------------------------------------------------- |
-| `GEMINI_COOKIES`          | ✅ Yes   | —       | Complete Cookie request header copied from the Gemini Web tab    |
-| `GEMINI_AUTH_USER`        | ❌ No    | —       | Google account slot from the Gemini URL, e.g. `2` for `/u/2/app` |
-| `GEMINI_REFRESH_INTERVAL` | ❌ No    | `1440`  | Cookie rotation interval in minutes (minimum `10`), see below    |
-| `GEMINI_MAX_RETRIES`      | ❌ No    | `3`     | Max retry attempts when an API call fails                        |
-| `GEMINI_TEMPORARY`        | ❌ No    | `false` | Enable stateless/incognito mode for all requests                 |
-| `PORT`                    | ❌ No    | `4981`  | Server port                                                      |
-| `RATE_LIMIT_ENABLED`      | ❌ No    | `false` | Enable or disable rate limiting                                  |
-| `RATE_LIMIT_WINDOW_MS`    | ❌ No    | `60000` | Rate limit time window in milliseconds                           |
-| `RATE_LIMIT_MAX_REQUESTS` | ❌ No    | `10`    | Maximum number of requests allowed per time window               |
-
-### Avoiding Gemini blocks (`GEMINI_REFRESH_INTERVAL`)
-
-The server periodically rotates the `__Secure-1PSIDTS` cookie and refreshes the
-Gemini session token to keep it alive. Doing this too often looks automated, and
-Google may answer with `429`, "unusual traffic" pages or force you to sign in again.
-
-- The default is **1440 minutes (24h)**. Values below **10** are raised to 10; `0` or
-  negative values fall back to the default.
-- If you still get blocked, keep the default (or go higher) and also keep
-  `RATE_LIMIT_ENABLED=true` with a modest `RATE_LIMIT_MAX_REQUESTS`.
-- If the session starts expiring between rotations (logs show
-  `marking client unhealthy`), lower it again or copy a fresh cookie header.
-
-### Configuration Priority
-
-1. **Environment Variables** (highest priority)
-2. **`.env` file**
-3. **Defaults** (lowest priority)
+Xem thêm tài liệu chi tiết cho từng tính năng:
+- [Tạo ảnh và xử lý ảnh đầu vào](docs/image-generation.md)
+- [Tạo video](docs/video-generation.md)
+- [Chế độ Canvas](docs/canvas.md)
+- [Tạo âm thanh](docs/music.md)
 
 ---
 
-## 🧪 Usage Examples
+## Cấu hình hệ thống
 
-### Model selection
+### Danh sách biến môi trường
 
-The provider discovers selectable models and their internal IDs from the signed-in account's Gemini Web model registry during session initialization and refresh. List the current choices with:
+| Tên biến | Bắt buộc | Mặc định | Ý nghĩa |
+| --- | --- | --- | --- |
+| `GEMINI_COOKIES` | Có | — | Toàn bộ header Cookie lấy từ tab Gemini Web |
+| `GEMINI_AUTH_USER` | Không | — | Vị trí tài khoản Google trong URL (ví dụ `2` nếu URL là `/u/2/`) |
+| `GEMINI_REFRESH_INTERVAL` | Không | `1440` | Chu kỳ xoay vòng cookie tính theo phút (tối thiểu `10`) |
+| `GEMINI_MAX_RETRIES` | Không | `3` | Số lần thử lại tối đa khi yêu cầu thất bại |
+| `GEMINI_TEMPORARY` | Không | `false` | Bật chế độ ẩn danh (không lưu lịch sử) cho mọi yêu cầu |
+| `PORT` | Không | `4981` | Cổng dịch vụ lắng nghe |
+| `RATE_LIMIT_ENABLED` | Không | `false` | Bật hoặc tắt tính năng giới hạn tần suất yêu cầu |
+| `RATE_LIMIT_WINDOW_MS` | Không | `60000` | Khung thời gian giới hạn tần suất tính bằng mili-giây |
+| `RATE_LIMIT_MAX_REQUESTS` | Không | `10` | Số yêu cầu tối đa cho phép trong mỗi khung thời gian |
+
+### Hạn chế bị chặn yêu cầu (`GEMINI_REFRESH_INTERVAL`)
+
+Máy chủ định kỳ xoay vòng cookie `__Secure-1PSIDTS` và làm mới token phiên của Gemini để duy trì kết nối. Việc xoay vòng quá thường xuyên có thể bị Google nhận diện là lưu lượng truy cập bất thường, dẫn đến lỗi 429 hoặc yêu cầu đăng nhập lại tài khoản.
+
+- Giá trị mặc định là 1440 phút (24 giờ). Các giá trị dưới 10 phút sẽ được tự động điều chỉnh về 10. Giá trị bằng 0 hoặc số âm sẽ quay về mặc định.
+- Nếu gặp lỗi giới hạn tần suất, giữ nguyên giá trị mặc định và bật `RATE_LIMIT_ENABLED=true` kèm giới hạn `RATE_LIMIT_MAX_REQUESTS` phù hợp.
+- Nếu phiên làm việc hết hạn trước thời gian xoay vòng (nhật ký ghi nhận `marking client unhealthy`), hãy sao chép lại chuỗi cookie mới từ trình duyệt.
+
+### Thứ tự ưu tiên cấu hình
+
+1. Biến môi trường hệ thống (ưu tiên cao nhất)
+2. Tệp `.env`
+3. Giá trị mặc định trong mã nguồn (ưu tiên thấp nhất)
+
+---
+
+## Hướng dẫn sử dụng
+
+### Cơ chế phát hiện mô hình
+
+Dịch vụ tự động đồng bộ danh sách mô hình từ tài khoản đăng nhập khi khởi tạo và làm mới phiên. Kiểm tra các mô hình khả dụng bằng lệnh:
 
 ```bash
 curl http://localhost:4981/openai/v1/models
 ```
 
-Use a returned model ID in your requests. IDs are derived from Gemini's current
-display labels, such as `gemini-3.6-flash` and `gemini-3.1-pro`; they are not a
-fixed allowlist. Every selectable registry entry is returned, so newly added
-Gemini models become available without a code update. Category names returned
-by Gemini remain aliases, and `gemini-advanced` is retained as a compatibility
-alias for the discovered Pro category. An unavailable or unknown name returns
-an error instead of silently selecting another model.
+Các mã mô hình phản ánh đúng nhãn hiển thị hiện thời trên giao diện web (ví dụ `gemini-3.6-flash`, `gemini-3.1-pro`) thay vì sử dụng danh sách cố định trong mã nguồn. Khi Google cập nhật hoặc đổi tên mô hình, các mô hình mới sẽ tự động xuất hiện. Tên `gemini-advanced` được duy trì như một bí danh tương thích cho dòng Pro.
 
-Model names are not seeded locally. When Google adds, removes, or renames a model, use the names returned by this endpoint instead of relying on old Gemini API version names.
+Trường `model` trong phản hồi trả về phiên bản cụ thể đang xử lý yêu cầu. Trong trường hợp tài khoản hết hạn mức tạm thời của mô hình được chọn, web Gemini có thể chuyển sang phục vụ bằng mô hình cấp thấp hơn. Proxy sẽ nhận biết và hiển thị đúng mô hình thực tế trong trường `model`, đồng thời lưu mã mô hình được yêu cầu ban đầu tại trường `requested_model`.
 
-The `model` field in a completion response contains the resolved versioned
-model ID (for example, a `gemini-advanced` request currently returns
-`gemini-3.1-pro`). Generated self-introductions are ordinary model output and
-can still be inaccurate.
-
-Gemini Web may silently serve a lower-tier model after the selected model's
-quota is exhausted. The proxy detects an unambiguous different model ID in the
-protocol response and reports that model in `model`. The original caller value
-is preserved in `requested_model`. This keeps the response truthful without
-blocking a model that Gemini still advertises as selectable; after its quota
-resets, `model` returns to the requested version.
-
-### OpenAI SDK (Python)
+### Sử dụng với OpenAI SDK (Python)
 
 ```python
 from openai import OpenAI
@@ -271,12 +236,12 @@ client = OpenAI(
 
 response = client.chat.completions.create(
     model="gemini-advanced",
-    messages=[{"role": "user", "content": "Hello!"}]
+    messages=[{"role": "user", "content": "Xin chào!"}]
 )
 print(response.choices[0].message.content)
 ```
 
-### Claude SDK (Python)
+### Sử dụng với Claude SDK (LangChain Python)
 
 ```python
 from langchain_anthropic import ChatAnthropic
@@ -287,11 +252,11 @@ llm = ChatAnthropic(
     api_key="not-needed"
 )
 
-response = llm.invoke("Explain quantum computing")
+response = llm.invoke("Giải thích ngắn gọn về điện toán lượng tử")
 print(response.content)
 ```
 
-### Gemini Native SDK (Python)
+### Sử dụng với Google GenAI SDK (Python)
 
 ```python
 from google import genai
@@ -306,75 +271,55 @@ client = genai.Client(
 
 response = client.models.generate_content(
     model="gemini-advanced",
-    contents="Write a poem about coding",
+    contents="Viết một đoạn thơ ngắn về lập trình",
 )
 print(response.text)
 ```
 
-Install the maintained SDK with `pip install google-genai`. Both regular
-generation and `generate_content_stream` are supported; the latter uses the
-SDK's `alt=sse` transport.
+Cài đặt thư viện bằng lệnh `pip install google-genai`. Dịch vụ hỗ trợ cả gọi thông thường và luồng phản hồi liên tục qua `generate_content_stream`.
 
-### cURL
+### Gọi trực tiếp bằng cURL
 
 ```bash
 curl -X POST http://localhost:4981/openai/v1/chat/completions \
   -H "Content-Type: application/json" \
   -d '{
     "model": "gemini-advanced",
-    "messages": [{"role": "user", "content": "What is AI?"}],
+    "messages": [{"role": "user", "content": "Trí tuệ nhân tạo là gì?"}],
     "stream": false
   }'
 ```
 
-More examples are available in the [`examples/`](examples/) directory.
+Xem thêm các ví dụ khác trong thư mục [`examples/`](examples/).
 
 ---
 
-## 📘 API Documentation
+## Tài liệu API
 
-Once running, visit **`http://localhost:4981/docs`** for interactive API documentation powered by [Scalar](https://scalar.com).
+Sau khi khởi động dịch vụ, truy cập `http://localhost:4981/docs` để xem và tương tác với tài liệu API qua giao diện Scalar.
 
 ![Scalar UI](assets/swagger.png)
 
 ---
 
-## 🤝 Contributing
+## Đóng góp mã nguồn
 
-Contributions are welcome! Please feel free to submit a Pull Request.
+Mọi đóng góp nhằm hoàn thiện dự án đều được hoan nghênh qua Pull Request.
 
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add some amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
+1. Fork kho lưu trữ về tài khoản cá nhân
+2. Tạo nhánh tính năng mới (`git checkout -b feature/ten-tinh-nang`)
+3. Lưu các thay đổi (`git commit -m 'Them tinh nang'`)
+4. Đẩy nhánh lên GitHub (`git push origin feature/ten-tinh-nang`)
+5. Tạo Pull Request vào nhánh chính
 
 ---
 
-## 👤 Author
+## Tác giả
 
 - **Nguyễn Tuấn Thành** ([@ntthanh2603](https://github.com/ntthanh2603))
 
 ---
 
-## 📄 License
+## Giấy phép
 
-This project is licensed under the MIT License — see the [LICENSE](LICENSE) file for details.
-
----
-
-## ⭐ Star History
-
-If you find this project useful, please consider giving it a star! ⭐
-
----
-
-## 🔗 Links
-
-- **GitHub**: [ntthanh2603/gemini-web-to-api](https://github.com/ntthanh2603/gemini-web-to-api)
-- **Gemini Web**: [gemini.google.com](https://gemini.google.com)
-- **Issues**: [Report a bug](https://github.com/ntthanh2603/gemini-web-to-api/issues)
-
----
-
-**Created with ❤️ by [@ntthanh2603](https://github.com/ntthanh2603)**
+Dự án được phân phối theo giấy phép MIT. Xem tệp [LICENSE](LICENSE) để biết thêm chi tiết.
