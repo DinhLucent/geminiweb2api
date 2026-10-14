@@ -3,17 +3,16 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/ntthanh2603/gemini-web-to-api/releases"><img src="https://img.shields.io/github/v/release/ntthanh2603/gemini-web-to-api?style=flat-square&logo=github&color=3670ad" alt="Release"></a>
+  <a href="https://github.com/DinhLucent/geminiweb2api/releases"><img src="https://img.shields.io/github/v/release/DinhLucent/geminiweb2api?style=flat-square&logo=github&color=3670ad" alt="Release"></a>
   <a href="https://golang.org/"><img src="https://img.shields.io/badge/Go-1.21+-00ADD8?style=flat-square&logo=go" alt="Go Version"></a>
   <a href="https://www.docker.com/"><img src="https://img.shields.io/badge/Docker-Ready-2496ED?style=flat-square&logo=docker" alt="Docker"></a>
-  <a href="https://github.com/ntthanh2603/gemini-web-to-api/pkgs/container/gemini-web-to-api"><img src="https://img.shields.io/badge/GHCR-Ready-2496ED?style=flat-square&logo=github" alt="GHCR"></a>
-  <a href="https://github.com/ntthanh2603/gemini-web-to-api/blob/main/LICENSE"><img src="https://img.shields.io/github/license/ntthanh2603/gemini-web-to-api?style=flat-square&color=orange" alt="License"></a>
+  <a href="https://github.com/DinhLucent/geminiweb2api/blob/main/LICENSE"><img src="https://img.shields.io/github/license/DinhLucent/geminiweb2api?style=flat-square&color=orange" alt="License"></a>
   <img src="https://img.shields.io/badge/Maintained%3F-yes-green.svg?style=flat-square" alt="Maintained">
 </p>
 
 <p align="center">
-  <a href="https://github.com/ntthanh2603/gemini-web-to-api/stargazers"><img src="https://img.shields.io/github/stars/ntthanh2603/gemini-web-to-api?style=flat-square&color=gold&label=stars" alt="Stars"></a>
-  <a href="https://github.com/ntthanh2603/gemini-web-to-api/issues"><img src="https://img.shields.io/github/issues/ntthanh2603/gemini-web-to-api?style=flat-square&color=red&label=issues" alt="Issues"></a>
+  <a href="https://github.com/DinhLucent/geminiweb2api/stargazers"><img src="https://img.shields.io/github/stars/DinhLucent/geminiweb2api?style=flat-square&color=gold&label=stars" alt="Stars"></a>
+  <a href="https://github.com/DinhLucent/geminiweb2api/issues"><img src="https://img.shields.io/github/issues/DinhLucent/geminiweb2api?style=flat-square&color=red&label=issues" alt="Issues"></a>
   <img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square" alt="PRs Welcome">
 </p>
 
@@ -29,7 +28,8 @@
 </p>
 
 <p align="center">
-  <b>Tác giả: <a href="https://github.com/ntthanh2603">@ntthanh2603</a></b>
+  <b>Tác giả: <a href="https://github.com/DinhLucent">DinhLucent (Eng.Dinh)</a></b><br/>
+  <sub>Nguyên tác: <a href="https://github.com/ntthanh2603">@ntthanh2603</a></sub>
 </p>
 
 > [!NOTE]
@@ -98,8 +98,8 @@ Phù hợp khi bạn cần chỉnh sửa mã nguồn hoặc biên dịch cho cá
 #### Bước 1: Tải mã nguồn
 
 ```bash
-git clone https://github.com/ntthanh2603/gemini-web-to-api.git
-cd gemini-web-to-api
+git clone https://github.com/DinhLucent/geminiweb2api.git
+cd geminiweb2api
 ```
 
 #### Bước 2: Cấu hình tệp môi trường
@@ -314,9 +314,10 @@ Mọi đóng góp nhằm hoàn thiện dự án đều được hoan nghênh qua
 
 ---
 
-## Tác giả
+## Tác giả & Đội ngũ
 
-- **Nguyễn Tuấn Thành** ([@ntthanh2603](https://github.com/ntthanh2603))
+- **Tác giả (Custom & Maintainer):** [DinhLucent](https://github.com/DinhLucent) (Eng.Dinh)
+- **Nguyên tác (Original Author):** Nguyễn Tuấn Thành ([@ntthanh2603](https://github.com/ntthanh2603))
 
 ---
 
